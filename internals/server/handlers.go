@@ -1,6 +1,10 @@
 package server
 
-import "github.com/gofiber/fiber/v3"
+import (
+	"socio/routes"
+
+	"github.com/gofiber/fiber/v3"
+)
 
 func errorHandler(c fiber.Ctx ,e error) error{
 
@@ -18,3 +22,10 @@ var notFoundHandler = func(c fiber.Ctx) error {
 		"error":"resource not found",
 	})
 } 
+
+func addRoutes(app *fiber.App){
+	baseRouter := app.Group("/")
+
+	routes.Users(baseRouter)
+
+}

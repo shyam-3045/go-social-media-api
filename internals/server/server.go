@@ -16,12 +16,12 @@
 			BodyLimit:    16 * 1024 * 1024,
 		})
 
+		defer app.Use(notFoundHandler)
+		defer app.Use(recover.New())
 		
-		app.Use(recover.New())
-
 		middlewares(app)
+		addRoutes(app)
 		
-		app.Use(notFoundHandler)
 		
 		
 

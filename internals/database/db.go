@@ -2,16 +2,15 @@ package database
 
 import (
 	"fmt"
-
-	"socio/models/friendships"
-	"socio/models/posts"
-	"socio/models/users"
-
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 var DB *gorm.DB
+
+func Client() *gorm.DB{
+	return DB
+}
 
 func Config() {
 	dsn := "host=localhost port=5432 user=postgres password=shyam123 dbname=socio sslmode=disable"
@@ -37,6 +36,6 @@ func Config() {
 
 	DB = db 
 
-	DB.AutoMigrate(&users.Users{} , &friendships.Friendships{} ,&posts.Posts{})
+	
 
 }
