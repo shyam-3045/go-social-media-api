@@ -11,7 +11,7 @@ func Users(r fiber.Router) {
 		usersRoutes.Post("/",users.Add)
 		// users.Get("/",nil)
 
-		// users.Get("/:id",nil)
+		usersRoutes.Get("/:id",users.GetByID)
 		// users.Delete("/:id",nil)
 
 }

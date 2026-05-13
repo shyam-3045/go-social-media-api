@@ -25,3 +25,15 @@ func (u *Users) Create(ctx context.Context) error {
 		WithContext(ctx).
 		Create(u).Error
 }
+
+func GetByID(ctx context.Context , id uuid.UUID) (*Users , error){
+	var user Users
+
+	err := database.Client().WithContext(ctx).First(&user,id).Error
+
+	if err != nil {
+		return nil ,err
+	}
+
+	return &user,nil
+}

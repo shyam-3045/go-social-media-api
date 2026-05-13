@@ -5,6 +5,8 @@ import (
 	dto "socio/internals/Dto"
 	"socio/models/users"
 	models "socio/models/users"
+
+	"github.com/google/uuid"
 )
 
 
@@ -21,4 +23,8 @@ func Create(ctx context.Context , body dto.UserCreate) (*models.Users , error){
 	}
 
 	return user,nil
+}
+
+func GetById(ctx context.Context , id uuid.UUID) (*models.Users , error){
+	return users.GetByID(ctx,id)
 }
