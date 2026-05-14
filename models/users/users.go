@@ -37,3 +37,32 @@ func GetByID(ctx context.Context , id uuid.UUID) (*Users , error){
 
 	return &user,nil
 }
+
+func Delete(ctx context.Context , id uuid.UUID) (*Users , error){
+	var user Users
+
+	result := database.Client().WithContext(ctx).First(&user,"id = ?",id)
+
+	if result.Error != nil {
+		return nil ,result.Error
+	}
+
+	err := database.Client().WithContext(ctx).Delete(&user).Error
+
+	if err != nil {
+		return nil , err
+	}
+
+	return &user,nil 
+}
+
+func Get(ctx context.Context) (*[]Users ,error){
+	var users []Users
+	err := database.Client().WithContext(ctx).Find(&users).Error
+
+	if err != nil {
+		return nil,err
+	}
+
+	return &users,nil
+}

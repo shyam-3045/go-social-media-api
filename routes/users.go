@@ -9,9 +9,9 @@ func Users(r fiber.Router) {
 	usersRoutes := r.Group("/users")
 
 		usersRoutes.Post("/",users.Add)
-		// users.Get("/",nil)
+		usersRoutes.Get("/",users.Get)
 
 		usersRoutes.Get("/:id",users.GetByID)
-		// users.Delete("/:id",nil)
+		usersRoutes.Delete("/:id",users.Delete)
 
 }

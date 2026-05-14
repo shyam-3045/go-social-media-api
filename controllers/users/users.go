@@ -76,3 +76,57 @@ func GetByID(c fiber.Ctx) error {
 	})
 
 }
+
+func Delete(c fiber.Ctx) error {
+	ctx := c.Context()
+	id := c.Params("id")
+
+	userID, err := uuid.Parse(id)
+
+	if err != nil {
+		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
+			"ok":    false,
+			"error": "incorrect user id ",
+		})
+	}
+
+	user, err := users.Delete(ctx, userID)
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return c.Status(http.StatusBadRequest).JSON(fiber.Map{
+				"ok":    false,
+				"error": "user not found  ",
+			})
+		}
+
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"ok":    false,
+			"error": "internal server error  ",
+		})
+	}
+
+	return c.Status(http.StatusOK).JSON(fiber.Map{
+		"ok":   true,
+		"data": user,
+	})
+
+}
+
+func Get(c fiber.Ctx) error {
+	ctx := c.Context()
+
+	users, err := users.Get(ctx)
+
+	if err != nil {
+
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"ok":    true,
+			"error": "internal server error",
+		})
+
+	}
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"ok":true,
+		"data":users,
+	})
+}

@@ -27,5 +27,6 @@ func addRoutes(app *fiber.App){
 	baseRouter := app.Group("/")
 
 	routes.Users(baseRouter)
+	routes.FriendShips(baseRouter)
 
 }

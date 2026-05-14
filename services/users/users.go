@@ -28,3 +28,11 @@ func Create(ctx context.Context , body dto.UserCreate) (*models.Users , error){
 func GetById(ctx context.Context , id uuid.UUID) (*models.Users , error){
 	return users.GetByID(ctx,id)
 }
+
+func Delete(ctx context.Context , id uuid.UUID) (*models.Users ,error){
+	return users.Delete(ctx , id)
+}
+
+func Get(ctx context.Context) (*[]models.Users ,error){
+	return users.Get(ctx)
+}

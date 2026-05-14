@@ -1,11 +1,15 @@
 package routes
 
-import "github.com/gofiber/fiber/v3"
+import (
+	"socio/controllers/friendships"
+
+	"github.com/gofiber/fiber/v3"
+)
 
 func FriendShips(r fiber.Router) {
-	// friendship := r.Group("/friendship")
+	friendship := r.Group("/friendship")
 
-	// friendship.Post(":id",nil)
+	friendship.Post("/",friendships.Create)
 
 
 }
